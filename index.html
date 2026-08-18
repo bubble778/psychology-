@@ -1,41 +1,50 @@
 <!doctype html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Psychology Toolkit — Privacy First</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Professional Psychology Toolkit v2 — Privacy First">
+<title>Professional Psychology Toolkit v2</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="topbar">
-  <div>
-    <h1>Psychology Toolkit</h1>
-    <p>เครื่องมือช่วยงานนักจิตวิทยา • Privacy-first / No storage</p>
+<header class="top">
+  <div class="brand">
+    <div class="logo">Ψ</div>
+    <div><h1>Professional Psychology Toolkit <span>v2</span></h1>
+    <p>Privacy First • No database • No cloud storage • Session-only</p></div>
   </div>
-  <button id="printBtn" class="secondary">พิมพ์ / Export PDF</button>
+  <div class="top-actions">
+    <button class="ghost" onclick="printPage()">🖨 Print / PDF</button>
+    <button class="ghost" onclick="clearSession()">🗑 Clear session</button>
+  </div>
 </header>
 
-<div class="layout">
+<div class="app-shell">
   <aside class="sidebar">
-    <input id="search" placeholder="ค้นหาเครื่องมือ..." aria-label="ค้นหา">
+    <div class="privacy-pill">🔐 ZERO STORAGE MODE</div>
+    <input id="search" class="search" placeholder="ค้นหาเครื่องมือ..." oninput="filterNav()">
     <nav id="nav">
-      <button data-page="dashboard">🏠 Dashboard</button>
-      <button data-page="adult">🧠 จิตวิทยาคลินิกผู้ใหญ่</button>
-      <button data-page="child">🧒 จิตพัฒนาการเด็ก</button>
-      <button data-page="screening">🔎 Screening vs Assessment</button>
-      <button data-page="schedule">📅 ตารางงาน</button>
-      <button data-page="notes">📝 Notes / Formulation</button>
-      <button data-page="reference">📚 Reference</button>
-      <button data-page="resources">📄 Psychoeducation</button>
-      <button data-page="statistics">📊 Statistics</button>
-      <button data-page="privacy">🔐 Privacy</button>
+      <button data-page="dashboard">🏠 <span>Dashboard</span></button>
+      <button data-page="screening">🔎 <span>Screening Hub</span></button>
+      <button data-page="adult">🧠 <span>Adult Clinical</span></button>
+      <button data-page="child">🧒 <span>Child Development</span></button>
+      <button data-page="assessment">📐 <span>Assessment Hub</span></button>
+      <button data-page="formulation">🧩 <span>Case Formulation</span></button>
+      <button data-page="notes">📝 <span>Progress Notes</span></button>
+      <button data-page="schedule">📅 <span>Schedule</span></button>
+      <button data-page="referral">🏥 <span>Referral Pathway</span></button>
+      <button data-page="resources">📚 <span>Resources</span></button>
+      <button data-page="statistics">📊 <span>Statistics</span></button>
+      <button data-page="reference">📖 <span>Reference</span></button>
+      <button data-page="privacy">🔐 <span>Privacy Center</span></button>
     </nav>
+    <div class="sidebar-foot">v2.0 • static/session-only architecture</div>
   </aside>
 
-  <main id="app"></main>
+  <main id="main"></main>
 </div>
-
-<div id="toast" role="status"></div>
+<div id="toast"></div>
 <script src="app.js"></script>
 </body>
 </html>
