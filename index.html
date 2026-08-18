@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Psychology Toolkit — Privacy First</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <h1>Psychology Toolkit</h1>
+    <p>เครื่องมือช่วยงานนักจิตวิทยา • Privacy-first / No storage</p>
+  </div>
+  <button id="printBtn" class="secondary">พิมพ์ / Export PDF</button>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <input id="search" placeholder="ค้นหาเครื่องมือ..." aria-label="ค้นหา">
+    <nav id="nav">
+      <button data-page="dashboard">🏠 Dashboard</button>
+      <button data-page="adult">🧠 จิตวิทยาคลินิกผู้ใหญ่</button>
+      <button data-page="child">🧒 จิตพัฒนาการเด็ก</button>
+      <button data-page="screening">🔎 Screening vs Assessment</button>
+      <button data-page="schedule">📅 ตารางงาน</button>
+      <button data-page="notes">📝 Notes / Formulation</button>
+      <button data-page="reference">📚 Reference</button>
+      <button data-page="resources">📄 Psychoeducation</button>
+      <button data-page="statistics">📊 Statistics</button>
+      <button data-page="privacy">🔐 Privacy</button>
+    </nav>
+  </aside>
+
+  <main id="app"></main>
+</div>
+
+<div id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
