@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Professional Psychology Toolkit v2 — Privacy First">
 <title>Professional Psychology Toolkit v2</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PsyToolkit">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,6 +22,7 @@
     <p>Privacy First • No database • No cloud storage • Session-only</p></div>
   </div>
   <div class="top-actions">
+    <button class="ghost" id="installBtn" style="display:none" onclick="installPWA()">📲 Install app</button>
     <button class="ghost" onclick="printPage()">🖨 Print / PDF</button>
     <button class="ghost" onclick="clearSession()">🗑 Clear session</button>
   </div>
@@ -29,9 +37,13 @@
       <button data-page="screening">🔎 <span>Screening Hub</span></button>
       <button data-page="adult">🧠 <span>Adult Clinical</span></button>
       <button data-page="child">🧒 <span>Child Development</span></button>
+      <button data-page="dir">🌱 <span>DIR/Floortime Observation</span></button>
       <button data-page="assessment">📐 <span>Assessment Hub</span></button>
       <button data-page="formulation">🧩 <span>Case Formulation</span></button>
       <button data-page="notes">📝 <span>Progress Notes</span></button>
+      <button data-page="risk">🚨 <span>Risk Assessment</span></button>
+      <button data-page="goals">🎯 <span>Treatment Goals & Follow-up</span></button>
+      <button data-page="caseconcept">🗂️ <span>Case Conceptualization</span></button>
       <button data-page="schedule">📅 <span>Schedule</span></button>
       <button data-page="referral">🏥 <span>Referral Pathway</span></button>
       <button data-page="resources">📚 <span>Resources</span></button>
@@ -39,12 +51,42 @@
       <button data-page="reference">📖 <span>Reference</span></button>
       <button data-page="privacy">🔐 <span>Privacy Center</span></button>
     </nav>
-    <div class="sidebar-foot">v2.0 • static/session-only architecture</div>
+    <div class="sidebar-foot">v2.5 • PWA/offline-ready • session-only architecture</div>
   </aside>
 
   <main id="main"></main>
 </div>
 <div id="toast"></div>
 <script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("service-worker.js").catch(() => {});
+  });
+}
+let deferredInstallPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  const btn = document.getElementById("installBtn");
+  if (btn) btn.style.display = "inline-block";
+});
+function installPWA() {
+  const btn = document.getElementById("installBtn");
+  if (!deferredInstallPrompt) {
+    flash("บนอุปกรณ์นี้: เปิดเมนูเบราว์เซอร์แล้วเลือก 'Add to Home Screen'");
+    return;
+  }
+  deferredInstallPrompt.prompt();
+  deferredInstallPrompt.userChoice.finally(() => {
+    deferredInstallPrompt = null;
+    if (btn) btn.style.display = "none";
+  });
+}
+window.addEventListener("appinstalled", () => {
+  const btn = document.getElementById("installBtn");
+  if (btn) btn.style.display = "none";
+});
+</script>
 </body>
 </html>
